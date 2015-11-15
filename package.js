@@ -9,7 +9,8 @@ Package.onUse(function(api){
 
   api.use([
     'mstn:firebase-core',
-    'mongo'
+    'mongo',
+    'templating'
   ], 'client');
 
   api.addFiles([

@@ -53,3 +53,13 @@ const handleOAuthPopup = function(accounts, callback){
 };
 
 Firebase.Accounts = new FirebaseAccounts;
+
+// register helpers
+//
+Template.registerHelper('currentUser', function(){
+  var user = Firebase.Accounts.user();
+  if (user){
+    return user[ user.provider ];
+  }
+});
+
