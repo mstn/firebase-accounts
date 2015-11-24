@@ -44,7 +44,7 @@ class FirebaseAccounts {
 const handleAuthChanged = function(authData){
   if (authData){
     authData._id = authData.uid;
-    this.users.insert(authData);
+    this.users.upsert(authData._id, authData);
   }
 };
 
