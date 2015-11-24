@@ -24,6 +24,7 @@ class FirebaseAccounts {
     }
 
     this.ref = new Firebase._FirebaseRef(endpoint);
+    this.ref.onAuth(handleAuthChanged, this);
   }
   logout(){
     this.connection().unauth();  
@@ -40,13 +41,18 @@ class FirebaseAccounts {
   }
 };
 
+const handleAuthChanged = function(authData){
+  if (authData){
+    authData._id = authData.uid;
+    this.users.insert(authData);
+  }
+};
+
 const handleOAuthPopup = function(accounts, callback){
   return function(error, authData){
-    if (error){
+     if (error){
       callback(error);
     } else {
-      authData._id = authData.uid;
-      accounts.users.insert(authData);
       callback(null, authData);
     }
   }
